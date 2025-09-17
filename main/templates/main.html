@@ -15,8 +15,18 @@
   <button>+ Add News</button>
 </a>
 
-<hr />
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+</a>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
 
+<hr />
+<a href="?filter=all">
+    <button type="button">All Articles</button>
+</a>
+<a href="?filter=my">
+    <button type="button">My Articles</button>
+</a> 
 {% if not news_list %}
 <p>Belum ada data berita pada football news.</p>
 {% else %} {% for news in news_list %}
@@ -26,8 +36,7 @@
   <p>
     <b>{{ news.get_category_display }}</b>{% if news.is_featured %} |
     <b>Featured</b>{% endif %}{% if news.is_news_hot %} | <b>Hot</b>{% endif %}
-    | <i>{{ news.created_at|date:"d M Y H:i" }}</i> | Views: {{ news.news_views
-    }}
+    | <i>{{ news.created_at|date:"d M Y H:i" }}</i> | Views: {{ news.news_views }}
   </p>
 
   {% if news.thumbnail %}
